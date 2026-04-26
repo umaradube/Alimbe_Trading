@@ -17,9 +17,15 @@
         .bg-gold { background-color: var(--gold); }
         .bg-obsidian { background-color: var(--obsidian); }
 
-        /* Navigation Styles */
+        /* Navigation Active State */
+        .nav-link-active { 
+            color: var(--gold) !important; 
+            border-bottom: 2px solid var(--gold);
+        }
+
+        /* Mobile Menu Transitions */
         #mobile-menu {
-            transition: transform 0.4s ease-in-out;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateX(100%);
         }
         #mobile-menu.active { transform: translateX(0); }
@@ -28,7 +34,7 @@
         .car-slider::-webkit-scrollbar { display: none; }
         .car-slider { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Modal Overlay Styles */
+        /* Modal Overlay */
         .modal-active { overflow: hidden; }
         #zoom-modal {
             display: none;
@@ -40,14 +46,13 @@
             opacity: 1;
         }
         
-        /* Modal Carousel Specifics */
-        .modal-slider-container {
+        .modal-card {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             background: white;
             border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
@@ -58,51 +63,73 @@
             <a href="index.html" class="text-2xl font-800 tracking-tighter uppercase">
                 ALIMBE <span class="gold-text underline decoration-2 underline-offset-4">TRADING</span>
             </a>
+            
             <div class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-gray-600">
                 <a href="index.html#about" class="hover:text-black transition">About</a>
-                <a href="showroom.html" class="text-black border-b border-gold transition">Showroom</a>
+                <a href="showroom.html" class="nav-link-active transition">Showroom</a>
                 <a href="index.html#export" class="hover:text-black transition">Export</a>
                 <a href="index.html#contact" class="hover:text-black transition">Contact</a>
             </div>
-            <a href="index.html#contact" class="bg-obsidian text-white px-8 py-2.5 text-xs font-bold uppercase rounded-full shadow-lg hover:bg-gray-800 transition">Inquire Now</a>
+
+            <div class="flex items-center space-x-4">
+                <a href="index.html#contact" class="bg-obsidian text-white px-8 py-2.5 text-xs font-bold uppercase rounded-full shadow-lg hover:bg-gray-800 transition">
+                    Inquire Now
+                </a>
+                <button id="menu-toggle" class="md:hidden text-obsidian focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <header class="pt-32 pb-16 bg-obsidian text-white text-center">
-        <div class="max-w-7xl mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-800 tracking-tighter uppercase mb-4">Our <span class="gold-text">Showroom</span></h1>
-            <p class="text-gray-400 font-light tracking-widest uppercase text-xs">Click any vehicle to expand the view</p>
-        </div>
-    </header>
-
-    <section class="py-20">
-        <div id="showroom-grid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            </div>
-    </section>
-
-    <div id="zoom-modal" class="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-md flex flex-col items-center justify-center p-4">
-        <button id="close-zoom" class="absolute top-8 right-8 text-white hover:text-gold transition z-[110]">
+    <div id="mobile-menu" class="fixed inset-0 bg-obsidian z-[60] flex flex-col items-center justify-center space-y-8 md:hidden">
+        <button id="menu-close" class="absolute top-6 right-6 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
+        <a href="index.html#about" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">About</a>
         
-        <div id="modal-content" class="w-full flex justify-center">
+        <a href="showroom.html" class="mobile-link text-gold border-b-2 border-gold text-2xl font-bold uppercase tracking-widest">Showroom</a>
+        
+        <a href="index.html#export" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">Export</a>
+        <a href="index.html#contact" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">Contact</a>
+    </div>
+
+    <header class="pt-32 pb-16 bg-obsidian text-white text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-800 tracking-tighter uppercase mb-4">Our <span class="gold-text">Showroom</span></h1>
+            <p class="text-gray-400 font-light tracking-widest uppercase text-xs">Excellence in Motion | Click any vehicle to expand</p>
+        </div>
+    </header>
+
+    <section class="py-20 min-h-screen">
+        <div id="showroom-grid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             </div>
+    </section>
+
+    <div id="zoom-modal" class="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <button id="close-zoom" class="absolute top-6 right-6 text-white hover:text-gold transition z-[110]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <div id="modal-content" class="w-full flex justify-center"></div>
     </div>
 
     <footer class="bg-obsidian text-white py-12">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-left">
             <div class="col-span-2">
                 <div class="font-extrabold text-2xl uppercase mb-4 tracking-tighter">ALIMBE <span class="gold-text">TRADING</span></div>
-                <p class="text-gray-500 text-sm max-w-sm font-light leading-relaxed">Delivering trust, value, and mobility across borders. From South Africa to the world.</p>
+                <p class="text-gray-500 text-sm max-w-sm font-light leading-relaxed">Delivering trust, value, and mobility across borders.</p>
             </div>
             <div>
                 <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6">Operations</h5>
                 <ul class="text-xs space-y-3 font-semibold tracking-widest">
                     <li><a href="index.html#export" class="hover:text-gold transition-colors">SADC EXPORT</a></li>
-                    <li><a href="showroom.html" class="hover:text-gold transition-colors">LOCAL INVENTORY</a></li>
-                    <li><a href="index.html#contact" class="hover:text-gold transition-colors">VEHICLE SOURCING</a></li>
+                    <li><a href="showroom.html" class="text-gold transition-colors">LOCAL INVENTORY</a></li>
                 </ul>
             </div>
             <div>
@@ -120,102 +147,98 @@
     </footer>
 
     <script>
-        const grid = document.getElementById('showroom-grid');
-        const modal = document.getElementById('zoom-modal');
-        const modalContent = document.getElementById('modal-content');
-        const closeZoom = document.getElementById('close-zoom');
+        // NAVIGATION HANDLERS
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.onclick = () => mobileMenu.classList.add('active');
+        menuClose.onclick = () => mobileMenu.classList.remove('active');
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.onclick = () => mobileMenu.classList.remove('active');
+        });
 
-        // Helper function for slider navigation
+        // GLOBAL CAROUSEL SCROLL
         window.scrollSlider = function(id, direction) {
             const slider = document.getElementById(id);
             if (slider) {
-                const scrollAmount = slider.clientWidth;
-                slider.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+                const scrollWidth = slider.clientWidth;
+                slider.scrollBy({ left: scrollWidth * direction, behavior: 'smooth' });
             }
         };
 
-        // Create 20 Vehicles
+        // RENDER VEHICLES
+        const grid = document.getElementById('showroom-grid');
+        const modal = document.getElementById('zoom-modal');
+        const modalContent = document.getElementById('modal-content');
+
         for (let i = 1; i <= 20; i++) {
-            const carDiv = document.createElement('div');
-            carDiv.className = "bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer group border border-gray-100";
-            
-            // Unique ID for the slider
             const sliderId = `slider-${i}`;
+            const carCard = document.createElement('div');
+            carCard.className = "bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 cursor-pointer group";
             
-            carDiv.innerHTML = `
+            carCard.innerHTML = `
                 <div class="relative overflow-hidden aspect-[4/3]">
                     <div id="${sliderId}" class="car-slider flex h-full overflow-x-auto snap-x snap-mandatory scroll-smooth">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center object-cover">
-                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center object-cover">
-                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center object-cover">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" class="w-full shrink-0 snap-center object-cover">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600" class="w-full shrink-0 snap-center object-cover">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=600" class="w-full shrink-0 snap-center object-cover">
                     </div>
-                    
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-2 md:opacity-0 group-hover:opacity-100 transition">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-0 group-hover:opacity-100 transition">
                         <button onclick="event.stopPropagation(); scrollSlider('${sliderId}', -1)" class="bg-white/90 p-2 rounded-full shadow-md hover:bg-gold hover:text-white transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                         </button>
                     </div>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 md:opacity-0 group-hover:opacity-100 transition">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 opacity-0 group-hover:opacity-100 transition">
                         <button onclick="event.stopPropagation(); scrollSlider('${sliderId}', 1)" class="bg-white/90 p-2 rounded-full shadow-md hover:bg-gold hover:text-white transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </button>
                     </div>
                 </div>
                 <div class="p-4 text-center">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Inventory Item #${i}</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Inventory ID: ALM-${i.toString().padStart(3, '0')}</span>
                 </div>
             `;
 
-            // Click to Zoom Logic
-            carDiv.addEventListener('click', () => {
+            carCard.onclick = () => {
                 const modalSliderId = `modal-slider-${i}`;
-                
-                // Construct a fresh gallery card for the modal to avoid ID conflicts
                 modalContent.innerHTML = `
-                    <div class="modal-slider-container">
-                        <div class="relative overflow-hidden aspect-[16/9]">
+                    <div class="modal-card">
+                        <div class="relative aspect-[16/9] overflow-hidden">
                             <div id="${modalSliderId}" class="car-slider flex h-full overflow-x-auto snap-x snap-mandatory scroll-smooth">
                                 <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200" class="w-full shrink-0 snap-center object-cover">
-                                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=1200" class="w-full shrink-0 snap-center object-cover">
                                 <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1200" class="w-full shrink-0 snap-center object-cover">
+                                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=1200" class="w-full shrink-0 snap-center object-cover">
                             </div>
                             <div class="absolute inset-y-0 left-0 flex items-center pl-4">
-                                <button onclick="scrollSlider('${modalSliderId}', -1)" class="bg-white/90 p-4 rounded-full shadow-xl hover:bg-gold hover:text-white transition">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                                <button onclick="scrollSlider('${modalSliderId}', -1)" class="bg-white/95 p-4 rounded-full shadow-2xl hover:bg-gold hover:text-white transition">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                 </button>
                             </div>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-4">
-                                <button onclick="scrollSlider('${modalSliderId}', 1)" class="bg-white/90 p-4 rounded-full shadow-xl hover:bg-gold hover:text-white transition">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                <button onclick="scrollSlider('${modalSliderId}', 1)" class="bg-white/95 p-4 rounded-full shadow-2xl hover:bg-gold hover:text-white transition">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-6 bg-white text-center">
-                            <h4 class="text-xs font-bold uppercase tracking-[0.4em] text-gray-500">Inventory Item #${i} | Full View</h4>
+                        <div class="p-6 text-center bg-white border-t border-gray-100">
+                            <h4 class="text-xs font-bold uppercase tracking-[0.5em] text-gray-400">ALM-${i.toString().padStart(3, '0')} | Detailed Gallery</h4>
                         </div>
                     </div>
                 `;
-                
                 modal.classList.add('active');
                 document.body.classList.add('modal-active');
-            });
+            };
 
-            grid.appendChild(carDiv);
+            grid.appendChild(carCard);
         }
 
-        // Close Modal Logic
-        closeZoom.addEventListener('click', () => {
+        // CLOSE MODAL LOGIC
+        document.getElementById('close-zoom').onclick = () => {
             modal.classList.remove('active');
             document.body.classList.remove('modal-active');
-            modalContent.innerHTML = '';
-        });
-
-        // Close on clicking outside the card
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeZoom.click();
-            }
-        });
+        };
+        modal.onclick = (e) => { if(e.target === modal) document.getElementById('close-zoom').click(); };
     </script>
 </body>
 </html>
