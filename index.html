@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimbe Trading | Driven by Trust. Delivered Worldwide.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --obsidian: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        h1, h2, h3, .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .gold-text { color: var(--gold); }
+        .bg-gold { background-color: var(--gold); }
+        .bg-obsidian { background-color: var(--obsidian); }
+        .border-gold { border-color: var(--gold); }
+        
+        /* SEAMLESS BUTTON ANIMATIONS */
+        .btn-seamless {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-seamless:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.1);
+        }
+        .btn-seamless:active {
+            transform: translateY(-1px);
+        }
+
+        /* MOBILE MENU TRANSITION */
+        #mobile-menu {
+            transition: transform 0.4s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .expertise-card {
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #f3f4f6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .expertise-card:hover, .expertise-card:active {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .carousel-item {
+            position: absolute;
+            inset: 0;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            z-index: 0;
+        }
+        .carousel-item.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .hover-gold:hover { background-color: #b8962e; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <nav id="main-nav" class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div id="nav-logo" class="text-2xl font-800 tracking-tighter uppercase">
+                ALIMBE <span class="gold-text underline decoration-2 underline-offset-4">TRADING</span>
+            </div>
+            
+            <div id="nav-links" class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-gray-600">
+                <a href="#about" class="hover:text-black transition">About</a>
+                <a href="#services" class="hover:text-black transition">Showroom</a>
+                <a href="#export" class="hover:text-black transition">Export</a>
+                <a href="#contact" class="hover:text-black transition">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="#contact" id="nav-cta" class="bg-obsidian text-white px-8 py-2.5 text-xs font-bold uppercase tracking-tighter hover:bg-gray-800 transition rounded-full shadow-lg">
+                    Inquire Now
+                </a>
+                
+                <button id="menu-toggle" class="md:hidden text-obsidian focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-obsidian z-[60] flex flex-col items-center justify-center space-y-8 md:hidden">
+        <button id="menu-close" class="absolute top-6 right-6 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="#about" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">About</a>
+        <a href="#services" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">Showroom</a>
+        <a href="#export" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">Export</a>
+        <a href="#contact" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold transition">Contact</a>
+    </div>
+
+    <section id="hero-section" class="relative h-screen flex items-center justify-center text-white overflow-hidden">
+        <div id="hero-carousel-container" class="absolute inset-0 bg-obsidian">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-40" alt="Luxury vehicle 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1761486554787-89b2b4eb64ac?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover opacity-40" alt="Luxury vehicle 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1585390062624-6e9948453bce?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover opacity-40" alt="Luxury vehicle 3">
+            </div>
+        </div>
+
+        <div id="carousel-controls" class="absolute inset-0 flex items-center justify-between px-4 md:px-10 z-20 pointer-events-none">
+            <button onclick="prevSlide()" class="pointer-events-auto p-3 rounded-full border border-white/20 bg-black/20 hover:bg-gold transition-colors backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button onclick="nextSlide()" class="pointer-events-auto p-3 rounded-full border border-white/20 bg-black/20 hover:bg-gold transition-colors backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+        
+        <div id="hero-content" class="relative z-10 text-center px-4 max-w-5xl">
+            <h1 class="text-5xl md:text-7xl font-800 mb-6 leading-tight">Driven by Trust.<br><span class="gold-text">Delivered Worldwide.</span></h1>
+            <p class="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto text-gray-300">
+                Connecting people to quality vehicles across borders. From South Africa to the rest of the continent, we deliver mobility with integrity.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="btn-seamless bg-gold text-white px-10 py-4 font-bold uppercase text-sm rounded-sm">Our Services</a>
+                <a href="#export" class="btn-seamless border border-white px-10 py-4 font-bold uppercase text-sm hover:bg-white hover:text-black rounded-sm">Export Process</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div id="about-text-content">
+                    <h2 class="text-sm font-bold gold-text uppercase tracking-widest mb-2">Who We Are</h2>
+                    <h3 class="text-4xl font-bold mb-6 italic">Built on reliability and consistency.</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Alimbe Trading is a growing and dynamic automotive dealership focused on the buying, selling, and sourcing of quality vehicles. Built on trust, reliability, and consistency, we aim to provide customers with vehicles that meet both their needs and their budget. We are committed to making car ownership simple, transparent, and accessible.
+                    </p>
+                    <div id="vision-mission-grid" class="grid grid-cols-2 gap-8 mt-10">
+                        <div>
+                            <h4 class="font-bold border-l-4 border-gold pl-3 mb-2 uppercase text-sm">Vision</h4>
+                            <p class="text-sm text-gray-500 italic">"Recognized automotive dealership known for quality vehicles."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold border-l-4 border-gold pl-3 mb-2 uppercase text-sm">Mission</h4>
+                            <p class="text-sm text-gray-500 italic">"Provide reliable, affordable, and high-quality vehicles."</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="core-values-box" class="bg-gray-100 p-10 rounded-lg border-t-8 border-gold">
+                    <h3 class="text-2xl font-bold mb-6">Our Customer Base</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li><span class="gold-text font-bold">✔</span> Local car buyers</li>
+                        <li><span class="gold-text font-bold">✔</span> International buyers (Africa-wide)</li>
+                        <li><span class="gold-text font-bold">✔</span> Car dealers looking for supply</li>
+                        <li><span class="gold-text font-bold">✔</span> Business owners needing fleet vehicles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-16 uppercase tracking-tighter">Our Expertise</h2>
+            <div id="services-grid" class="grid md:grid-cols-4 gap-8">
+                <div class="expertise-card group">
+                    <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center bg-gray-50 group-hover:bg-gold/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-3 uppercase tracking-tighter">Vehicle Sales</h4>
+                    <p class="text-sm text-gray-500">Quality pre-owned vehicles with competitive pricing.</p>
+                </div>
+                <div class="expertise-card group">
+                    <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center bg-gray-50 group-hover:bg-gold/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-3 uppercase tracking-tighter">Sourcing</h4>
+                    <p class="text-sm text-gray-500">Bespoke sourcing nationwide based on your budget.</p>
+                </div>
+                <div class="expertise-card group">
+                    <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center bg-gray-50 group-hover:bg-gold/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-3 uppercase tracking-tighter">Buy & Trade-In</h4>
+                    <p class="text-sm text-gray-500">Easy vehicle trade-in and purchase options.</p>
+                </div>
+                <div class="expertise-card group">
+                    <div class="w-12 h-12 mx-auto mb-6 flex items-center justify-center bg-gray-50 group-hover:bg-gold/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-3 uppercase tracking-tighter">Assistance</h4>
+                    <p class="text-sm text-gray-500">Expert guidance before you make your purchase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="export" class="py-24 bg-obsidian text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-sm font-bold gold-text uppercase tracking-[0.3em] mb-3">Global Mobility</h2>
+                <h3 class="text-4xl md:text-5xl font-bold mb-6">Vehicle Export Services</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light">We specialize in exporting vehicles from South Africa to other African countries and beyond, offering a seamless, end-to-end logistics solution.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start mb-20">
+                <div class="bg-white/5 border border-white/10 p-10 rounded-2xl">
+                    <h4 class="text-xl font-bold mb-8 flex items-center gap-3">
+                        <span class="w-8 h-[1px] bg-gold"></span> What We Offer
+                    </h4>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <span class="gold-text mt-1">✔</span>
+                            <div>
+                                <span class="block font-bold uppercase text-xs tracking-widest mb-1">Vehicle Sourcing</span>
+                                <span class="text-gray-400 text-sm">Dedicated sourcing for international clients based on specific requirements.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="gold-text mt-1">✔</span>
+                            <div>
+                                <span class="block font-bold uppercase text-xs tracking-widest mb-1">Inspection & Quality</span>
+                                <span class="text-gray-400 text-sm">Rigorous quality checks and multi-point inspections before export.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="gold-text mt-1">✔</span>
+                            <div>
+                                <span class="block font-bold uppercase text-xs tracking-widest mb-1">Documentation</span>
+                                <span class="text-gray-400 text-sm">Handling all export permits, police clearances, and SARS documentation.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="gold-text mt-1">✔</span>
+                            <div>
+                                <span class="block font-bold uppercase text-xs tracking-widest mb-1">Shipping Logistics</span>
+                                <span class="text-gray-400 text-sm">Professional shipping arrangements (port-to-port or border delivery).</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="bg-gold p-10 rounded-2xl text-obsidian">
+                        <h4 class="text-xl font-bold mb-4 uppercase tracking-tighter">Export Destinations</h4>
+                        <p class="mb-6 font-medium">We serve the entire SADC region and beyond:</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm font-bold uppercase tracking-widest">
+                            <div class="flex items-center gap-2"><span>•</span> Zimbabwe</div>
+                            <div class="flex items-center gap-2"><span>•</span> Zambia</div>
+                            <div class="flex items-center gap-2"><span>•</span> Mozambique</div>
+                            <div class="flex items-center gap-2"><span>•</span> Botswana</div>
+                            <div class="flex items-center gap-2"><span>•</span> Namibia</div>
+                            <div class="flex items-center gap-2"><span>•</span> Malawi</div>
+                        </div>
+                        <p class="mt-8 text-xs italic opacity-80">*Other African markets available on request.</p>
+                    </div>
+                    <div class="border border-white/10 p-8 rounded-2xl text-center">
+                        <p class="text-gray-400 italic text-sm">We make buying and exporting cars stress-free and secure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-10">
+                <h4 class="text-xs font-bold uppercase tracking-[0.4em] gold-text mb-12">How Our Export Process Works</h4>
+                <div id="export-process" class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">01</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Select or Request</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">02</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Source & Confirm</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">03</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Agreement & Payment</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">04</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Inspection & Prep</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">05</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Clearance & Docs</p>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/5 rounded-xl group hover:border-gold transition-all">
+                        <div class="text-gold font-bold text-2xl mb-2">06</div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest leading-tight">Shipping & Delivery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 bg-obsidian text-white p-10 md:p-16 rounded-2xl relative overflow-hidden group">
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                            <span class="text-gold font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Personalized Service</span>
+                            <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-6">Expert Vehicle <br class="hidden md:block"> Sourcing</h2>
+                            <p class="text-gray-400 max-w-sm text-sm md:text-lg font-light leading-relaxed">Can't find the exact model you're looking for? Our network across South Africa allows us to source the perfect vehicle within your budget.</p>
+                        </div>
+                        <a href="#contact-form" class="mt-10 inline-flex items-center gap-4 font-bold uppercase text-[10px] tracking-widest text-gold hover:translate-x-2 transition-transform">
+                            Start Your Request <span class="w-10 h-[1px] bg-gold"></span>
+                        </a>
+                    </div>
+                    <div class="absolute -right-20 -bottom-20 text-[15rem] font-bold text-white/5 pointer-events-none select-none italic">ALIMBE</div>
+                </div>
+                
+                <div class="bg-white border border-gray-100 p-10 rounded-2xl flex flex-col justify-center text-center">
+                    <h3 class="text-5xl font-800 gold-text mb-2">100%</h3>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Verified Inspection</p>
+                    <div class="my-8 border-t border-gray-50 w-full"></div>
+                    <h3 class="text-5xl font-800 gold-text mb-2">SADC</h3>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Export Certified</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-obsidian text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+            <div class="col-span-2">
+                <div class="font-extrabold text-2xl uppercase mb-4 tracking-tighter">ALIMBE <span class="gold-text">TRADING</span></div>
+                <p class="text-gray-500 text-sm max-w-sm font-light leading-relaxed">Delivering trust, value, and mobility across borders. From South Africa to the world.</p>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6">Operations</h5>
+                <ul class="text-xs space-y-3 font-semibold tracking-widest">
+                    <li><a href="#" class="hover:text-gold transition-colors">SADC EXPORT</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">LOCAL INVENTORY</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">VEHICLE SOURCING</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6">HQ</h5>
+                <p class="text-sm font-semibold leading-relaxed tracking-wide">
+                    Durban, KZN<br>
+                    South Africa
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold tracking-[0.3em] text-gray-600 gap-4">
+            <span>&copy; 2026 ALIMBE TRADING GROUP. ALL RIGHTS RESERVED.</span>
+            <div class="flex space-x-10">
+                <a href="#" class="hover:text-white transition-colors">PRIVACY</a>
+                <a href="#" class="hover:text-white transition-colors">TERMS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // MOBILE MENU LOGIC
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // CAROUSEL LOGIC
+        const slides = document.querySelectorAll('.carousel-item');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function startTimer() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            clearInterval(slideInterval);
+            startTimer();
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        startTimer();
+    </script>
+</body>
+</html>
