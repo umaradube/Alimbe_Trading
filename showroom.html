@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showroom | Alimbe Trading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --obsidian: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        h1, h2, h3, .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .gold-text { color: var(--gold); }
+        .bg-gold { background-color: var(--gold); }
+        .bg-obsidian { background-color: var(--obsidian); }
+        
+        /* Consistent Button Animation from Main Page */
+        .btn-seamless {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-seamless:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: transform 0.4s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active { transform: translateX(0); }
+
+        /* Custom Scrollbar for Vehicle Image Sliders */
+        .car-slider::-webkit-scrollbar { height: 4px; }
+        .car-slider::-webkit-scrollbar-track { background: #f1f1f1; }
+        .car-slider::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <nav id="main-nav" class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" id="nav-logo" class="text-2xl font-800 tracking-tighter uppercase">
+                ALIMBE <span class="gold-text underline decoration-2 underline-offset-4">TRADING</span>
+            </a>
+            
+            <div id="nav-links" class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-gray-600">
+                <a href="index.html#about" class="hover:text-black transition">About</a>
+                <a href="showroom.html" class="text-black border-b border-gold transition">Showroom</a>
+                <a href="index.html#export" class="hover:text-black transition">Export</a>
+                <a href="index.html#contact" class="hover:text-black transition">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="index.html#contact" id="nav-cta" class="bg-obsidian text-white px-8 py-2.5 text-xs font-bold uppercase tracking-tighter hover:bg-gray-800 transition rounded-full shadow-lg">
+                    Inquire Now
+                </a>
+                <button id="menu-toggle" class="md:hidden text-obsidian focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-obsidian z-[60] flex flex-col items-center justify-center space-y-8 md:hidden">
+        <button id="menu-close" class="absolute top-6 right-6 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="index.html#about" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest hover:text-gold">About</a>
+        <a href="showroom.html" class="mobile-link text-gold text-2xl font-bold uppercase tracking-widest">Showroom</a>
+        <a href="index.html#export" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest">Export</a>
+        <a href="index.html#contact" class="mobile-link text-white text-2xl font-bold uppercase tracking-widest">Contact</a>
+    </div>
+
+    <header class="pt-32 pb-16 bg-obsidian text-white text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-800 tracking-tighter uppercase mb-4">Our <span class="gold-text">Showroom</span></h1>
+            <p class="text-gray-400 font-light tracking-widest uppercase text-xs">Excellence in every detail. Explore our current inventory.</p>
+        </div>
+    </header>
+
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+                    <div class="car-slider flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Front view">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Side view">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Interior">
+                    </div>
+                    <div class="p-4 text-center">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Scroll for more images &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+                    <div class="car-slider flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="SUV Front">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="SUV Rear">
+                        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="SUV Profile">
+                    </div>
+                    <div class="p-4 text-center">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Scroll for more images &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+                    <div class="car-slider flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
+                        <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Coupe Front">
+                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Coupe Wheel Detail">
+                        <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800" class="w-full shrink-0 snap-center aspect-[16/10] object-cover" alt="Coupe Interior">
+                    </div>
+                    <div class="p-4 text-center">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Scroll for more images &rarr;</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-obsidian text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+            <div class="col-span-2">
+                <div class="font-extrabold text-2xl uppercase mb-4 tracking-tighter">ALIMBE <span class="gold-text">TRADING</span></div>
+                <p class="text-gray-500 text-sm max-w-sm font-light leading-relaxed">Delivering trust, value, and mobility across borders. From South Africa to the world.</p>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6">Operations</h5>
+                <ul class="text-xs space-y-3 font-semibold tracking-widest">
+                    <li><a href="index.html#export" class="hover:text-gold transition-colors">SADC EXPORT</a></li>
+                    <li><a href="showroom.html" class="hover:text-gold transition-colors">LOCAL INVENTORY</a></li>
+                    <li><a href="index.html#contact" class="hover:text-gold transition-colors">VEHICLE SOURCING</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-6">HQ</h5>
+                <p class="text-sm font-semibold leading-relaxed tracking-wide">Durban, KZN<br>South Africa</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold tracking-[0.3em] text-gray-600 gap-4">
+            <span>&copy; 2026 ALIMBE TRADING GROUP. ALL RIGHTS RESERVED.</span>
+            <div class="flex space-x-10">
+                <a href="#" class="hover:text-white transition-colors">PRIVACY</a>
+                <a href="#" class="hover:text-white transition-colors">TERMS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // MOBILE MENU LOGIC
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => mobileMenu.classList.add('active'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('active')));
+    </script>
+</body>
+</html>
